@@ -1,0 +1,254 @@
+using Microsoft.AspNetCore.Mvc;
+
+[ApiController]
+[Route("api/citas")]
+public class CitaController : ControllerBase
+{
+    private static List<Cita> citas = new List<Cita>();
+
+
+    // GET => PARA LEER TODAS LAS CITAS
+    // api/citas
+
+    /*
+    [HttpGet]
+    public IActionResult GetCitas()
+    {
+        try
+        {
+            return Ok(citas);
+        }
+        catch(Exception)
+        {
+            return StatusCode(500, "Error interno de servidor");
+        }
+    }
+    */
+
+    [HttpGet]
+    public IActionResult GetCitas()
+    {
+        try
+        {   // Almacenamos una lista de objetos anónimos tipo base (object) en "var" para
+            // no tener que crear una clase específica como por ejemplo ResumenCita
+            var resultado = new List<object>();
+
+            foreach (Cita cita in citas)
+            {
+                resultado.Add(new
+                {
+                    cita.IdCita,
+                    cita.Fecha,
+                    cita.Estado,
+                    cita.IdPaciente,
+                    cita.IdMedico
+                });
+            }
+
+            return Ok(resultado);
+        }
+        catch(Exception)
+        {
+            return StatusCode(500, "Error interno de servidor");
+        }
+    }
+
+    // GET => PARA OBTENER UNA CITA POR ID
+    // api/citas/{id}
+    [HttpGet("{id}")]
+    public IActionResult GetCita(int id)
+    {
+        try
+        {
+            if (id <= 0)
+            {
+                return BadRequest("El id debe ser mayor a 0");
+            }
+
+            foreach (Cita cita in citas)
+            {
+                if (cita.IdCita == id)
+                {
+                    // Se usa "?" para indicar que el tipo permite valores null,
+                    // evitando errores si aún no se ha encontrado o asignado un paciente.
+                    // Declara una variable de tipo Paciente y otra tipo Medico 
+                    // que puede ser nula e inicialmente no apunta a ningún objeto (paciente o medico).
+                    Paciente? pacienteEncontrado = null; 
+                    Medico? medicoEncontrado = null;
+
+                    // Buscar paciente
+                    foreach (Paciente paciente in PacienteController.pacientes)
+                    {
+                        if (paciente.IdPaciente == cita.IdPaciente)
+                        {
+                            pacienteEncontrado = paciente;
+                            break;
+                        }
+                    }
+
+                    // Buscar medico
+                    foreach (Medico medico in MedicoController.medicos)
+                    {
+                        if (medico.IdMedico == cita.IdMedico)
+                        {
+                            medicoEncontrado = medico;
+                            break;
+                        }
+                    }
+
+                    var resultado = new
+                    {
+                        cita.IdCita,
+                        cita.Fecha,
+                        cita.Estado,
+                        Paciente = pacienteEncontrado,
+                        Medico = medicoEncontrado
+                    };
+
+                    return Ok(resultado);
+                }
+            }
+
+            return NotFound("Cita no encontrada");
+        }
+        catch(Exception)
+        {
+            return StatusCode(500, "Error interno de servidor");
+        }
+    }
+
+
+    // POST => PARA REGISTRAR UNA NUEVA CITA
+    [HttpPost]
+    public IActionResult CrearCita([FromBody] Cita nuevaCita)
+    {
+        try
+        {
+            if (nuevaCita == null)
+            {
+                return BadRequest("Debe enviar los datos de la cita");
+            }
+            
+            // VALIDAR QUE EXISTAN PACIENTE Y MEDICO
+            // .Any() => Evalúa la colección y retorna TRUE si encuentra al menos un elemento
+            // Declaramos una variable booleana que verificará si existe un paciente en la lista y
+            // verificamos con .Any() si algún paciente de la lista tiene el mismo Id que se envió en la nueva cita
+            bool pacienteExiste = PacienteController.pacientes.Any(p => p.IdPaciente == nuevaCita.IdPaciente);
+            // Aplicamos misma validacion para medico
+            bool medicoExiste = MedicoController.medicos.Any(m => m.IdMedico == nuevaCita.IdMedico);
+
+            if (!pacienteExiste || !medicoExiste)
+            {
+                return BadRequest("El paciente o el médico no existen");
+            }
+
+            // Obtener el siguiente ID
+            if (citas.Count == 0)
+            {
+                nuevaCita.IdCita = 1;
+            }
+            else
+            {
+                nuevaCita.IdCita = citas.Max(c => c.IdCita) + 1;
+            }
+
+            citas.Add(nuevaCita);
+
+            // Enviar notificación por correo
+            INotificacion notificacion = new NotificacionCorreo();
+            notificacion.Enviar("Su cita médica ha sido registrada");
+
+            return Created($"api/citas/{nuevaCita.IdCita}", nuevaCita);
+        }
+        catch(Exception)
+        {
+            return StatusCode(500, "Error interno de servidor");
+        }
+    }
+
+    // PUT => PARA ACTUALIZAR UNA CITA
+    [HttpPut("{id}")]
+    public IActionResult ActualizarCita(int id, [FromBody] Cita citaActualizada)
+    {
+        try
+        {
+            if (id <= 0)
+            {
+                return BadRequest("El id debe ser mayor que 0");
+            }
+
+            if (citaActualizada == null)
+            {
+                return BadRequest("Debe enviar correctamente los datos de la cita");
+            }
+
+            // VALIDAR QUE EXISTAN PACIENTE Y MEDICO
+            bool pacienteExiste = PacienteController.pacientes
+                .Any(p => p.IdPaciente == citaActualizada.IdPaciente);
+
+            bool medicoExiste = MedicoController.medicos
+                .Any(m => m.IdMedico == citaActualizada.IdMedico);
+
+            if (!pacienteExiste || !medicoExiste)
+            {
+                return BadRequest("El paciente o el médico no existen");
+            }
+
+            foreach (Cita cita in citas)
+            {
+                if (cita.IdCita == id)
+                {
+                    cita.IdPaciente = citaActualizada.IdPaciente;
+                    cita.IdMedico = citaActualizada.IdMedico;
+                    cita.Fecha = citaActualizada.Fecha;
+                    cita.Estado = citaActualizada.Estado;
+
+                    // Enviar notificación por SMS
+                    INotificacion notificacion = new NotificacionSMS();
+                    notificacion.Enviar("Su cita médica fue actualizada");
+
+                    return Ok("Cita actualizada satisfactoriamente");
+                }
+            }
+
+            return NotFound("Cita no encontrada");
+        }
+        catch (Exception)
+        {
+            return StatusCode(500,"Ocurrió un error interno en el servidor");
+        }
+    }
+
+
+    // DELETE => PARA ELIMINAR UNA CITA
+    [HttpDelete("{id}")]
+    public IActionResult EliminarCita(int id)
+    {
+        try
+        {
+            if (id <= 0)
+            {
+                return BadRequest("ID inválido");
+            }
+
+            foreach (Cita cita in citas)
+            {
+                if (cita.IdCita == id)
+                {
+                    citas.Remove(cita);
+                    // Enviar notificación por WhatsApp
+                    INotificacion notificacion = new NotificacionWhatsApp();
+                    notificacion.Enviar("Su cita médica fue cancelada");
+
+                    return Ok("Cita eliminada correctamente");
+                }
+            }
+
+            return NotFound("Cita no encontrada");
+        }
+        catch (Exception)
+        {
+            return StatusCode(500,"Ocurrió un error interno en el servidor");
+        }
+    }
+}

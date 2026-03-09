@@ -1,0 +1,7 @@
+# Archivos de compilación
+bin/
+obj/
+
+# Configuración de Visual Studio
+.vs/
+

@@ -1,0 +1,571 @@
+{
+  "info": {
+    "_postman_id": "6b31dc5e-97e9-4418-8765-143c78f538a5",
+    "name": "WebApi_CitasMedicas",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "42936839"
+  },
+  "item": [
+    {
+      "name": "Medicos",
+      "item": [
+        {
+          "name": "Listar_Medicos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5168/api/medicos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5168",
+              "path": [
+                "api",
+                "medicos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Agregar_Medico",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nombres\": \"Anahi\",\r\n  \"apePaterno\": \"Talledo\",\r\n  \"apeMaterno\": \"Santa Cruz\",\r\n  \"dni\": \"12345679\",\r\n  \"celular\": \"987654321\",\r\n  \"especialidad\": \"Traumatología\",\r\n  \"fechaIngreso\": \"2024-01-15\",\r\n  \"estado\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5168/api/medicos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5168",
+              "path": [
+                "api",
+                "medicos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar_Medico_ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5168/api/medicos/6",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5168",
+              "path": [
+                "api",
+                "medicos",
+                "6"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar_Medico",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nombres\": \"Anahi\",\r\n  \"apePaterno\": \"Talledo\",\r\n  \"apeMaterno\": \"Santa Cruz\",\r\n  \"dni\": \"12345679\",\r\n  \"celular\": \"987654321\",\r\n  \"especialidad\": \"Ginecología\",\r\n  \"fechaIngreso\": \"2024-01-15\",\r\n  \"estado\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5168/api/medicos/6",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5168",
+              "path": [
+                "api",
+                "medicos",
+                "6"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar_Medico",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5168/api/medicos/6",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5168",
+              "path": [
+                "api",
+                "medicos",
+                "6"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Pacientes",
+      "item": [
+        {
+          "name": "Listar_Pacientes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5168/api/pacientes",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5168",
+              "path": [
+                "api",
+                "pacientes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Agregar_Paciente",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nombres\": \"Carlos\",\r\n  \"apePaterno\": \"Ramirez\",\r\n  \"apeMaterno\": \"Lopez\",\r\n  \"dni\": \"87654321\",\r\n  \"celular\": \"912345678\",\r\n  \"correo\": \"carlos.ramirez@gmail.com\",\r\n  \"fechaNacimiento\": \"1995-06-15\",\r\n  \"estado\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5168/api/pacientes",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5168",
+              "path": [
+                "api",
+                "pacientes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar_Paciente_ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5168/api/pacientes/6",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5168",
+              "path": [
+                "api",
+                "pacientes",
+                "6"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar_Paciente",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nombres\": \"Carlos Alberto\",\r\n  \"apePaterno\": \"Ramirez\",\r\n  \"apeMaterno\": \"Lopez\",\r\n  \"dni\": \"87654321\",\r\n  \"celular\": \"912345678\",\r\n  \"correo\": \"carlosalbertoramirezlopez@gmail.com\",\r\n  \"fechaNacimiento\": \"1985-06-15\",\r\n  \"estado\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5168/api/pacientes/6",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5168",
+              "path": [
+                "api",
+                "pacientes",
+                "6"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar_Paciente",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:5168/api/pacientes/6",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5168",
+              "path": [
+                "api",
+                "pacientes",
+                "6"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Citas",
+      "item": [
+        {
+          "name": "Listar_Citas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5168/api/citas",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5168",
+              "path": [
+                "api",
+                "citas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Agregar_Cita",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n \"idPaciente\": 1,\r\n \"idMedico\": 1,\r\n \"fecha\": \"2026-07-20T10:00:00\",\r\n \"estado\": \"Programada\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5168/api/citas",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5168",
+              "path": [
+                "api",
+                "citas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar_Cita_ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5168/api/citas/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5168",
+              "path": [
+                "api",
+                "citas",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar_Cita",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n \"idPaciente\": 1,\r\n \"idMedico\": 1,\r\n \"fecha\": \"2026-08-11T10:00:00\",\r\n \"estado\": \"Reprogramada\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5168/api/citas/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5168",
+              "path": [
+                "api",
+                "citas",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar_Cita",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5168/api/citas/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5168",
+              "path": [
+                "api",
+                "citas",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Validaciones",
+      "item": [
+        {
+          "name": "Cita_Validar_Fecha",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n \"idPaciente\": 1,\r\n \"idMedico\": 1,\r\n \"estado\": \"Programada\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5168/api/citas",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5168",
+              "path": [
+                "api",
+                "citas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cita_Validar_Estado",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n \"idPaciente\": 1,\r\n \"idMedico\": 1,\r\n \"fecha\": \"2026-07-20T10:00:00\",\r\n \"estado\": \"Rep\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5168/api/citas",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5168",
+              "path": [
+                "api",
+                "citas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cita_Validar_Paciente",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n \"idPaciente\": 100,\r\n \"idMedico\": 1,\r\n \"fecha\": \"2026-07-20T10:00:00\",\r\n \"estado\": \"Programada\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5168/api/citas",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5168",
+              "path": [
+                "api",
+                "citas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Cita_Validar_Medico",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n \"idPaciente\": 1,\r\n \"idMedico\": -50,\r\n \"fecha\": \"2026-07-20T10:00:00\",\r\n \"estado\": \"Programada\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5168/api/citas",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5168",
+              "path": [
+                "api",
+                "citas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Medico_Validar_DNI",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nombres\": \"Anahi\",\r\n  \"apePaterno\": \"Talledo\",\r\n  \"apeMaterno\": \"Santa Cruz\",\r\n  \"dni\": \"4444\",\r\n  \"celular\": \"987654321\",\r\n  \"especialidad\": \"Traumatología\",\r\n  \"fechaIngreso\": \"2024-01-15\",\r\n  \"estado\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5168/api/medicos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5168",
+              "path": [
+                "api",
+                "medicos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Paciente_Validar_Correo",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"nombres\": \"Carlos\",\r\n  \"apePaterno\": \"Ramirez\",\r\n  \"apeMaterno\": \"Lopez\",\r\n  \"dni\": \"87654321\",\r\n  \"celular\": \"912345678\",\r\n  \"correo\": \"carlos.ramirez.com\",\r\n  \"fechaNacimiento\": \"1995-06-15\",\r\n  \"estado\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5168/api/pacientes",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5168",
+              "path": [
+                "api",
+                "pacientes"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
