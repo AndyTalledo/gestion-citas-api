@@ -139,7 +139,7 @@ Para probar los endpoints de la API se recomienda utilizar **Postman**.
 ## 1. Clonar el repositorio
 
 ```
-git clone https://github.com/usuario/nombre-del-repositorio.git
+git clone https://github.com/AndyTalledo/gestion-citas-api
 ```
 
 O descargar el proyecto como archivo ZIP desde GitHub.
