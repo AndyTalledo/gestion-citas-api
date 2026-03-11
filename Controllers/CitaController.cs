@@ -117,13 +117,26 @@ public class CitaController : ControllerBase
                             pacienteEncontrado.ApePaterno,
                             pacienteEncontrado.ApeMaterno,
                             pacienteEncontrado.DNI,
-                            // No devolvemos Fecha de nacimiento
-                            pacienteEncontrado.Edad,
                             pacienteEncontrado.Celular,
-                            pacienteEncontrado.Correo
+                            pacienteEncontrado.Correo,
+                            // No devolvemos Fecha de nacimiento
+                            pacienteEncontrado.Edad
                         },
-                        // En caso de médico si devolvemos objeto completo
-                        Medico = medicoEncontrado,
+                        // En caso de médico hacemos similar solo para ordenarlo
+                        Medico = medicoEncontrado is null ? null : new
+                        {
+                            medicoEncontrado.IdMedico,
+                            medicoEncontrado.Nombres,
+                            medicoEncontrado.ApePaterno,
+                            medicoEncontrado.ApeMaterno,
+                            medicoEncontrado.DNI,
+                            medicoEncontrado.Celular,
+                            medicoEncontrado.Especialidad,
+                            medicoEncontrado.FechaIngreso,
+                            // Agregamos el nombre "Estado" al campo, ya que si no se coloca
+                            // el bloque anónimo lo tomará como una expresión y dará un error
+                            Estado = medicoEncontrado.Estado ? "Activo" : "Inactivo"
+                        },
                         cita.Fecha,
                         cita.Estado,
                         cita.FechaRegistro,

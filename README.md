@@ -347,6 +347,28 @@ Este diseño permite agregar nuevos tipos de notificación sin modificar la lóg
 
 ---
 
+# Control de datos mediante objetos anónimos
+
+En algunos endpoints de la API se utilizan objetos anónimos para construir las respuestas JSON. Esto permite:
+
+* Mostrar únicamente los campos relevantes de Paciente y Médico.
+* Ocultar información que no es necesaria para el cliente.
+* Organizar mejor la estructura de los datos en la respuesta.
+
+---
+
+# Control de auditoría de registros
+
+La entidad Cita incluye dos campos para el control de auditoría de los registros:
+
+**FechaRegistro**: se asigna automáticamente al momento de crear una cita y representa la fecha en que fue registrada en el sistema.
+
+**FechaActualizacion**: se actualiza cada vez que se modifica una cita, permitiendo identificar la última actualización realizada.
+
+Estos campos permiten llevar un control temporal de los registros y son una práctica común en el desarrollo de APIs y sistemas de gestión.
+
+---
+
 # Información adicional del proyecto
 
 - La información de las citas se almacena **en memoria** dentro de la aplicación.
