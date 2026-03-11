@@ -355,6 +355,8 @@ En algunos endpoints de la API se utilizan objetos anónimos para construir las 
 * Ocultar información que no es necesaria para el cliente.
 * Organizar mejor la estructura de los datos en la respuesta.
 
+De esta forma se controla qué información se expone en la API y se mantiene una estructura de respuesta más clara y segura.
+
 ---
 
 # Control de auditoría de registros
