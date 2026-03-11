@@ -5,10 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 public class CitaController : ControllerBase
 {
     private static List<Cita> citas = new List<Cita>();
-
-
-    // GET => PARA LEER TODAS LAS CITAS
-    // api/citas
+    /*
+    private static List<Cita> citas = new List<Cita>()
+    {
+        new Cita{IdCita=2,IdPaciente=2,IdMedico=3,Fecha = new DateTime(2022,9,15)}
+    };
+    */
 
     /*
     [HttpGet]
@@ -25,6 +27,9 @@ public class CitaController : ControllerBase
     }
     */
 
+    // GET => PARA LEER TODAS LAS CITAS
+    // api/citas
+
     [HttpGet]
     public IActionResult GetCitas()
     {
@@ -38,10 +43,12 @@ public class CitaController : ControllerBase
                 resultado.Add(new
                 {
                     cita.IdCita,
+                    cita.IdPaciente,
+                    cita.IdMedico,
                     cita.Fecha,
                     cita.Estado,
-                    cita.IdPaciente,
-                    cita.IdMedico
+                    cita.FechaRegistro,
+                    cita.FechaActualizacion
                 });
             }
 
@@ -99,10 +106,28 @@ public class CitaController : ControllerBase
                     var resultado = new
                     {
                         cita.IdCita,
+                        // Creamos un nuevo objeto que devuelva los campos requeridos del paciente.
+                        // Para no devolver todos los campos y para evitar error 
+                        // en caso devuelva valor nulo usamos un operador ternario
+                        // Si es el valor es null devuelve "null", caso contrario devuelve el objeto
+                        Paciente = pacienteEncontrado is null ? null : new
+                        {
+                            pacienteEncontrado.IdPaciente,
+                            pacienteEncontrado.Nombres,
+                            pacienteEncontrado.ApePaterno,
+                            pacienteEncontrado.ApeMaterno,
+                            pacienteEncontrado.DNI,
+                            // No devolvemos Fecha de nacimiento
+                            pacienteEncontrado.Edad,
+                            pacienteEncontrado.Celular,
+                            pacienteEncontrado.Correo
+                        },
+                        // En caso de médico si devolvemos objeto completo
+                        Medico = medicoEncontrado,
                         cita.Fecha,
                         cita.Estado,
-                        Paciente = pacienteEncontrado,
-                        Medico = medicoEncontrado
+                        cita.FechaRegistro,
+                        cita.FechaActualizacion
                     };
 
                     return Ok(resultado);
@@ -202,6 +227,8 @@ public class CitaController : ControllerBase
                     cita.IdMedico = citaActualizada.IdMedico;
                     cita.Fecha = citaActualizada.Fecha;
                     cita.Estado = citaActualizada.Estado;
+                    // Actualiza FechaActualizacion al hacer cambios
+                    cita.FechaActualizacion = DateTime.Now;
 
                     // Enviar notificación por SMS
                     INotificacion notificacion = new NotificacionSMS();
