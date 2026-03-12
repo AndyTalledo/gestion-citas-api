@@ -106,7 +106,7 @@ public class CitaController : ControllerBase
                     var resultado = new
                     {
                         cita.IdCita,
-                        // Creamos un nuevo objeto que devuelva los campos requeridos del paciente.
+                        // Creamos un nuevo objeto anónimo que devuelva los campos requeridos del paciente.
                         // Para no devolver todos los campos y para evitar error 
                         // en caso devuelva valor nulo usamos un operador ternario
                         // Si es el valor es null devuelve "null", caso contrario devuelve el objeto
